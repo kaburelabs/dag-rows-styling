@@ -11,7 +11,7 @@ list_of_vals = [
         "Value Col": 31950000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "No",
-        "Date Col": "2024/01/02",
+        "Date Col": "2024-01-02",
         "Link Col": "https://www.google.com",
     },
     {
@@ -21,7 +21,7 @@ list_of_vals = [
         "Value Col": 29995000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
-        "Date Col": "2024/03/02",
+        "Date Col": "2024-03-02",
         "Link Col": "https://www.google.com",
     },
     {
@@ -31,7 +31,7 @@ list_of_vals = [
         "Value Col": 34900000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "No",
-        "Date Col": "2024/01/10",
+        "Date Col": "2024-01-10",
         "Link Col": "https://www.google.com",
     },
     {
@@ -41,7 +41,7 @@ list_of_vals = [
         "Value Col": 26000000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
-        "Date Col": "2024/10/02",
+        "Date Col": "2024-10-02",
         "Link Col": "https://www.google.com",
     },
     {
@@ -51,7 +51,7 @@ list_of_vals = [
         "Value Col": 31500000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
-        "Date Col": "2024/01/01",
+        "Date Col": "2024-01-01",
         "Link Col": "https://www.google.com",
     },
 ]
@@ -75,7 +75,7 @@ app.layout = html.Div(
                     + [
                         {
                             "field": c,
-                            # "cellRenderer": "CreateLink",
+                            "cellRenderer": "CreateLink",
                             "valueFormatter": {
                                 "function": "FormatNumbersByRow(params)"
                             },

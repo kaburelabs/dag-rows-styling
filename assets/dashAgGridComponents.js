@@ -8,8 +8,5 @@ dagcomponentfuncs.CreateLink = function (params) {
             "Link redirect"
         );
     }
-    return React.createElement(
-        'div',
-        {children: params.value}
-    );
+    return params.formatValue(params.value);
 }
