@@ -5,52 +5,62 @@ import pandas as pd
 
 list_of_vals = [
     {
-        "Val ID": "Val-ID-001",
+        "Val ID": "ID-001",
         "Year Col": "2017",
         "Hours Col": 1253.0,
         "Value Col": 31950000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "No",
+        "Options Col": "OPTION 1",
+        "Long Opt List Col":"option 21",
         "Date Col": "2024-01-02",
         "Link Col": "https://www.google.com",
     },
     {
-        "Val ID": "Val-ID-002",
+        "Val ID": "ID-002",
         "Year Col": "2016",
         "Hours Col": 2541.0,
         "Value Col": 29995000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
+        "Options Col": "OTHER OPTION 2",
+        "Long Opt List Col":"option 1",
         "Date Col": "2024-03-02",
         "Link Col": "https://www.google.com",
     },
     {
-        "Val ID": "Val-ID-003",
+        "Val ID": "ID-003",
         "Year Col": "2019",
         "Hours Col": 566.0,
         "Value Col": 34900000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "No",
+        "Options Col": "OPTION 2",
+        "Long Opt List Col":"option 2",
         "Date Col": "2024-01-10",
         "Link Col": "https://www.google.com",
     },
     {
-        "Val ID": "Val-ID-004",
+        "Val ID": "ID-004",
         "Year Col": "2013",
         "Hours Col": 2732.0,
         "Value Col": 26000000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
+        "Options Col": "OPTION 1",
+        "Long Opt List Col":"option 15",
         "Date Col": "2024-10-02",
         "Link Col": "https://www.google.com",
     },
     {
-        "Val ID": "Val-ID-005",
+        "Val ID": "ID-005",
         "Year Col": "2018",
         "Hours Col": 1543.0,
         "Value Col": 31500000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
+        "Options Col": "OTHER OPTION 1",
+        "Long Opt List Col":"option 35",
         "Date Col": "2024-01-01",
         "Link Col": "https://www.google.com",
     },
@@ -68,14 +78,14 @@ app = Dash()
 app.layout = html.Div(
     [
         dcc.Store(id="changed-cell", data=[]),
-        html.H2("Testing Dash AG GRID"),
+        html.H2("Dash AG GRID - Rows cell styling"),
         dag.AgGrid(
             rowData=data_list,
             columnDefs=[{"field": "Val ID", "editable": False}]
                     + [
                         {
                             "field": c,
-                            "cellRenderer": "CreateLink",
+                            "cellRenderer": "FormatSpecificCells",
                             "valueFormatter": {
                                 "function": "FormatNumbersByRow(params)"
                             },
@@ -89,18 +99,19 @@ app.layout = html.Div(
                             "autoHeight": True,
                             "valueSetter": {"function": "testValue(params)"},
                             "editable": {
-                                "function": "['Link Col'].indexOf(params.data['Val ID']) === -1"
+                                "function": "['Link Col', 'Text Col'].indexOf(params.data['Val ID']) === -1"
                             },
                         }
                         for c in columns_list
                         if c != "Val ID"
                     ],
-            defaultColDef={"editable": True, "flex": 1},
+            defaultColDef={"editable": True},
             dashGridOptions={
                 "undoRedoCellEditing": False,
                 "undoRedoCellEditingLimit": 20,
             },
             id="ag-grid-table",
+            style={"height": "700px"},
         ),
         dcc.Store(id="original-data", data=data_list),
         html.Div(id="edited-table-output"),

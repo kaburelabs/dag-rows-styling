@@ -49,6 +49,32 @@ dagfuncs.cellEditorSelector = function(params) {
           popup: true,
         };
     }
+    if (["Options Col"].includes(params.data["Val ID"])) {
+        return {
+          component: 'agSelectCellEditor',
+          params: {
+            values: ['Option 1', 'Option 2', 'Other Option 1', 
+                     'Other Option 2', '3'],
+          },
+        };
+    };
+    if (["Long Opt List Col"].includes(params.data["Val ID"])) {
+        let options = [];
+        for (let i = 0; i < 50; i++) {
+            let randomName = 'option ' + i.toString();
+            options.push(randomName);
+        }
+        return {
+          component: 'agSelectCellEditor',
+          params: {
+            values: options,
+            allowTyping: true,
+            filterList: true,
+            highlightMatch: true,
+        }
+          }
+          
+    };
     if (params.data["Val ID"] == "AMSTAT Link") {
         return {
             component: React.createElement(
@@ -57,16 +83,33 @@ dagfuncs.cellEditorSelector = function(params) {
                 "AMSTAT Link"
             )
         }
-    }
-
+    };
     return undefined;
 };
 
+function isFourDigits(value) {
+    let fourDigitsRegex = /^\d{4}$/;
+    return fourDigitsRegex.test(value);
+}
+function isBetween1950AndCurrentYear(value) {
+    let currentYear = new Date().getFullYear();
+    return value >= 1950 && value <= currentYear;
+}
 
 dagfuncs.testValue = (params) => {
     if (!params.newValue) {
         return false
     }
+    if (params.data["Val ID"] == "Year Col") {
+        let currentYear = new Date().getFullYear();
+        // Check if the text is composed by 4 digits and the YEAR is between 1900 and 2022 
+        if (!isFourDigits(params.newValue)) {
+            return false
+        } 
+        if (!isBetween1950AndCurrentYear(params.newValue)) {
+            return false
+        }
+    }  
     params.data[params.column.colId] = params.newValue
     return true
 }
