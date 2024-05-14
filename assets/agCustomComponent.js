@@ -5,10 +5,11 @@ var dagfuncs = window.dashAgGridFunctions = window.dashAgGridFunctions || {};
 dagfuncs.DMC_Select = class {
     // gets called once before the renderer is used
     init(params) {
+        console.log(params)
         if (params.data["Val ID"] == "Country Col") {
             // create the cell
             this.params = params;
-
+            console.log(params.options['country'])
             // function for when Dash is trying to send props back to the component / server
             var setProps = (props) => {
                 if (typeof props.value != typeof undefined) {

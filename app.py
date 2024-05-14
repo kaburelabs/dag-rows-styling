@@ -14,7 +14,7 @@ list_of_vals = [
         "Bool Col": "No",
         "Options Col": "OPTION 1",
         "Long List Col": "option 78",
-        "Country Col": "Brazil",
+        "Country Col": "United States",
         "Date Col": "2024-01-02",
         "Link Col": "https://www.google.com",
     },
@@ -53,7 +53,7 @@ list_of_vals = [
         "Bool Col": "Yes",
         "Options Col": "OPTION 1",
         "Long List Col": "option 8",
-        "Country Col": "China",
+        "Country Col": "Brazil",
         "Date Col": "2024-10-02",
         "Link Col": "https://www.google.com",
     },
@@ -80,9 +80,8 @@ columns_list = list(df.columns)
 
 app = Dash()
 
-
 def get_country_values():
-    return {"long_list_options": [f"option {n}" for n in range(100)], "country":[
+    return {"long_list_options": [f"option {n}" for n in range(2000)], "country":[
         "Afghanistan",
         "Aland Islands",
         "Albania",
