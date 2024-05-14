@@ -19,12 +19,13 @@ dagfuncs.FormatNumbersByRow = function(params) {
     }
 }
 
-dagfuncs.cellEditorSelector = function(params) {
+dagfuncs.cellEditorSelector = function(params, list_vals) {
+    
     if (["Text Col", "Year Col"].includes(params.data["Val ID"]))  {
         return {
             component: "agTextCellEditor",
         }
-    }
+    };
     if (["Date Col"].includes(params.data["Val ID"]))  {
         return {
             component: "agDateStringCellEditor",
@@ -34,12 +35,12 @@ dagfuncs.cellEditorSelector = function(params) {
                 'max': '2040-12-31',
               },
         }
-    }
+    };
     if (["Hours Col", "Value Col"].includes(params.data["Val ID"])) {
         return {
             component: "agNumberCellEditor",
         }
-    }
+    };
     if (["Bool Col"].includes(params.data["Val ID"])) {
         return {
           component: 'agSelectCellEditor',
@@ -48,7 +49,7 @@ dagfuncs.cellEditorSelector = function(params) {
           },
           popup: true,
         };
-    }
+    };
     if (["Options Col"].includes(params.data["Val ID"])) {
         return {
           component: 'agSelectCellEditor',
@@ -57,32 +58,6 @@ dagfuncs.cellEditorSelector = function(params) {
                      'Other Option 2', '3'],
           },
         };
-    };
-    if (["Long Opt List Col"].includes(params.data["Val ID"])) {
-        let options = [];
-        for (let i = 0; i < 50; i++) {
-            let randomName = 'option ' + i.toString();
-            options.push(randomName);
-        }
-        return {
-          component: 'agSelectCellEditor',
-          params: {
-            values: options,
-            allowTyping: true,
-            filterList: true,
-            highlightMatch: true,
-        }
-          }
-          
-    };
-    if (params.data["Val ID"] == "AMSTAT Link") {
-        return {
-            component: React.createElement(
-                'a',
-                {href: params.value},
-                "AMSTAT Link"
-            )
-        }
     };
     return undefined;
 };

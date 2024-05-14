@@ -2,70 +2,75 @@ import dash
 from dash import html, Dash, Output, Input, State, dcc
 import dash_ag_grid as dag
 import pandas as pd
+import dash_mantine_components as dmc
 
 list_of_vals = [
     {
-        "Val ID": "ID-001",
+        "Val ID": "Item 001",
         "Year Col": "2017",
         "Hours Col": 1253.0,
         "Value Col": 31950000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "No",
         "Options Col": "OPTION 1",
-        "Long Opt List Col":"option 21",
+        "Long List Col": "option 78",
+        "Country Col": "Brazil",
         "Date Col": "2024-01-02",
         "Link Col": "https://www.google.com",
     },
     {
-        "Val ID": "ID-002",
+        "Val ID": "Item 002",
         "Year Col": "2016",
         "Hours Col": 2541.0,
         "Value Col": 29995000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
         "Options Col": "OTHER OPTION 2",
-        "Long Opt List Col":"option 1",
+        "Long List Col": "option 30",
+        "Country Col": "Canada",
         "Date Col": "2024-03-02",
         "Link Col": "https://www.google.com",
     },
     {
-        "Val ID": "ID-003",
+        "Val ID": "Item 003",
         "Year Col": "2019",
         "Hours Col": 566.0,
         "Value Col": 34900000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "No",
         "Options Col": "OPTION 2",
-        "Long Opt List Col":"option 2",
+        "Long List Col": "option 1",
+        "Country Col": "China",
         "Date Col": "2024-01-10",
         "Link Col": "https://www.google.com",
     },
     {
-        "Val ID": "ID-004",
+        "Val ID": "Item 004",
         "Year Col": "2013",
         "Hours Col": 2732.0,
         "Value Col": 26000000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
         "Options Col": "OPTION 1",
-        "Long Opt List Col":"option 15",
+        "Long List Col": "option 8",
+        "Country Col": "China",
         "Date Col": "2024-10-02",
         "Link Col": "https://www.google.com",
     },
     {
-        "Val ID": "ID-005",
+        "Val ID": "Item 005",
         "Year Col": "2018",
         "Hours Col": 1543.0,
         "Value Col": 31500000.0,
         "Text Col": "testing a random text which is long enough to wrap",
         "Bool Col": "Yes",
         "Options Col": "OTHER OPTION 1",
-        "Long Opt List Col":"option 35",
+        "Long List Col": "option 15",
+        "Country Col": "France",
         "Date Col": "2024-01-01",
         "Link Col": "https://www.google.com",
     },
 ]
-
 
 df = pd.DataFrame(list_of_vals)
 df = df.set_index("Val ID").T
@@ -75,6 +80,263 @@ columns_list = list(df.columns)
 
 app = Dash()
 
+
+def get_country_values():
+    return {"long_list_options": [f"option {n}" for n in range(100)], "country":[
+        "Afghanistan",
+        "Aland Islands",
+        "Albania",
+        "Algeria",
+        "Andorra",
+        "Angola",
+        "Anguilla",
+        "Antarctica",
+        "Antigua and Barbuda",
+        "Argentina",
+        "Armenia",
+        "Aruba",
+        "Australia",
+        "Austria",
+        "Azerbaijan",
+        "Bahamas",
+        "Bahrain",
+        "Bangladesh",
+        "Barbados",
+        "Belarus",
+        "Belgium",
+        "Belize",
+        "Benin",
+        "Bermuda",
+        "Bhutan",
+        "Bolivia",
+        "Bonaire, Sint Eustatius and Saba",
+        "Bosnia and Herzegovina",
+        "Botswana",
+        "Bouvet Island",
+        "Brazil",
+        "British Indian Ocean Territory",
+        "British Virgin Islands",
+        "Brunei Darussalam",
+        "Bulgaria",
+        "Burkina Faso",
+        "Burundi",
+        "Cambodia",
+        "Cameroon",
+        "Canada",
+        "Cape Verde",
+        "Cayman Islands",
+        "Central African Republic",
+        "Chad",
+        "Chile",
+        "China",
+        "Christmas Island",
+        "Cocos (Keeling) Islands",
+        "Colombia",
+        "Comoros",
+        "Congo",
+        "Congo, the Democratic Republic of the",
+        "Cook Islands",
+        "Costa Rica",
+        "Cote d'Ivoire",
+        "Croatia",
+        "Cuba",
+        "Curaçao",
+        "Cyprus",
+        "Czech Republic",
+        "Denmark",
+        "Djibouti",
+        "Dominica",
+        "Dominican Republic",
+        "Ecuador",
+        "Egypt",
+        "El Salvador",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Estonia",
+        "Ethiopia",
+        "Falkland Islands (Malvinas)",
+        "Faroe Islands",
+        "Fiji",
+        "Finland",
+        "France",
+        "French Guiana",
+        "French Polynesia",
+        "French Southern Territories",
+        "Gabon",
+        "Gambia",
+        "Georgia",
+        "Germany",
+        "Ghana",
+        "Gibraltar",
+        "Greece",
+        "Greenland",
+        "Grenada",
+        "Guadeloupe",
+        "Guatemala",
+        "Guernsey",
+        "Guinea",
+        "Guinea-Bissau",
+        "Guyana",
+        "Haiti",
+        "Heard Island and McDonald Islands",
+        "Holy See (Vatican City State)",
+        "Honduras",
+        "Hong Kong",
+        "Hungary",
+        "Iceland",
+        "India",
+        "Indonesia",
+        "Iran, Islamic Republic of",
+        "Iraq",
+        "Ireland",
+        "Isle of Man",
+        "Israel",
+        "Italy",
+        "Ivory Coast",
+        "Jamaica",
+        "Japan",
+        "Jersey",
+        "Jordan",
+        "Kazakhstan",
+        "Kenya",
+        "Kiribati",
+        "Korea, Democratic People's Republic of",
+        "Korea, Republic of",
+        "Kosovo",
+        "Kuwait",
+        "Kyrgyzstan",
+        "Lao People's Democratic Republic",
+        "Latvia",
+        "Lebanon",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Liechtenstein",
+        "Lithuania",
+        "Luxembourg",
+        "Macao",
+        "Macedonia, the former Yugoslav Republic of",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Malta",
+        "Marshall Islands",
+        "Martinique",
+        "Mauritania",
+        "Mauritius",
+        "Mayotte",
+        "Mexico",
+        "Moldova, Republic of",
+        "Monaco",
+        "Mongolia",
+        "Montenegro",
+        "Montserrat",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "Nepal",
+        "Netherlands",
+        "New Caledonia",
+        "New Zealand",
+        "Nicaragua",
+        "Niger",
+        "Nigeria",
+        "Niue",
+        "Norfolk Island",
+        "Norway",
+        "Oman",
+        "Pakistan",
+        "Palestine",
+        "Panama",
+        "Papua New Guinea",
+        "Paraguay",
+        "Peru",
+        "Philippines",
+        "Pitcairn",
+        "Poland",
+        "Portugal",
+        "Puerto Rico",
+        "Qatar",
+        "Reunion",
+        "Romania",
+        "Russian Federation",
+        "Rwanda",
+        "Saint Barthélemy",
+        "Saint Helena, Ascension and Tristan da Cunha",
+        "Saint Kitts and Nevis",
+        "Saint Lucia",
+        "Saint Martin (French part)",
+        "Saint Pierre and Miquelon",
+        "Saint Vincent and the Grenadines",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Saudi Arabia",
+        "Scotland",
+        "Senegal",
+        "Serbia",
+        "Seychelles",
+        "Sierra Leone",
+        "Singapore",
+        "Sint Maarten (Dutch part)",
+        "Slovakia",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Georgia and the South Sandwich Islands",
+        "South Korea",
+        "South Sudan",
+        "Spain",
+        "Sri Lanka",
+        "St Vincent Grenadines",
+        "Sudan",
+        "Suriname",
+        "Svalbard and Jan Mayen",
+        "Swaziland",
+        "Sweden",
+        "Switzerland",
+        "Syrian Arab Republic",
+        "Taiwan",
+        "Tajikistan",
+        "Tanzania",
+        "Thailand",
+        "Timor-Leste",
+        "Togo",
+        "Tokelau",
+        "Tonga",
+        "Tortola",
+        "Trinidad and Tobago",
+        "Tunisia",
+        "Turkey",
+        "Turkmenistan",
+        "Turks and Caicos Islands",
+        "Tuvalu",
+        "Uganda",
+        "Ukraine",
+        "United Arab Emirates",
+        "United Kingdom",
+        "United States",
+        "Uruguay",
+        "Uzbekistan",
+        "Vanuatu",
+        "Venezuela",
+        "Viet Nam",
+        "Wales",
+        "Wallis and Futuna",
+        "Western Sahara",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe",
+        "Tahiti",
+        "TBD",
+    ]}
+
+
 app.layout = html.Div(
     [
         dcc.Store(id="changed-cell", data=[]),
@@ -82,29 +344,32 @@ app.layout = html.Div(
         dag.AgGrid(
             rowData=data_list,
             columnDefs=[{"field": "Val ID", "editable": False}]
-                    + [
-                        {
-                            "field": c,
-                            "cellRenderer": "FormatSpecificCells",
-                            "valueFormatter": {
-                                "function": "FormatNumbersByRow(params)"
-                            },
-                            "cellEditorSelector": {
-                                "function": "cellEditorSelector(params)"
-                            },
-                            "cellDataType": False,
-                            "minWidth": 80,
-                            "wrapText": True,
-                            # "cellRenderer": "markdown",
-                            "autoHeight": True,
-                            "valueSetter": {"function": "testValue(params)"},
-                            "editable": {
-                                "function": "['Link Col', 'Text Col'].indexOf(params.data['Val ID']) === -1"
-                            },
-                        }
-                        for c in columns_list
-                        if c != "Val ID"
-                    ],
+            + [
+                {
+                    "field": c,
+                    "cellRenderer": "FormatSpecificCells",
+                    "valueFormatter": {"function": "FormatNumbersByRow(params)"},
+                    "cellEditorSelector": {
+                        "function": f"cellEditorSelector(params, {get_country_values()})"
+                    },
+                    "cellDataType": False,
+                    "minWidth": 80,
+                    "wrapText": True,
+                    "cellEditor": {"function": "DMC_Select"},
+                    "cellEditorParams": {
+                        "options": get_country_values(),
+                        "clearable": True,
+                        "placeholder": "Select Option",
+                    },
+                    "autoHeight": True,
+                    "valueSetter": {"function": "testValue(params)"},
+                    "editable": {
+                        "function": "['Link Col', 'Text Col'].indexOf(params.data['Val ID']) === -1"
+                    },
+                }
+                for c in columns_list
+                if c != "Val ID"
+            ],
             defaultColDef={"editable": True},
             dashGridOptions={
                 "undoRedoCellEditing": False,
@@ -155,7 +420,7 @@ def update_table(changed_value, data_table, changes_stored, og_data):  # active_
                 if changes_stored["change_id"] != change_id
             ]
             return changes_stored
-        
+
         new_changes = {
             "change_id": change_id,
             "val-ID": key,
@@ -271,7 +536,7 @@ def update_content_output(changed_cells, columns):
         to_change_cells = 0
         for (n, val) in enumerate(columns):
             if key_to_check in val.keys():
-                if val['cellStyle']== {}:
+                if val["cellStyle"] == {}:
                     pass
                 else:
                     to_change_cells += 1
@@ -282,12 +547,12 @@ def update_content_output(changed_cells, columns):
             return dash.no_update
         else:
             return columns
-        
+
     list_of_sn = [val["val-ID"] for val in changed_cells]
-    
+
     for (n, val) in enumerate(columns):
         if val["field"] in list_of_sn:
-            sn_val=val["field"]
+            sn_val = val["field"]
             list_of_rows = [
                 int(get_rows["index_row"])
                 for get_rows in changed_cells
@@ -317,6 +582,7 @@ def update_content_output(changed_cells, columns):
             else:
                 pass
     return columns
+
 
 if __name__ == "__main__":
     app.run_server(debug=True, port=8050)
