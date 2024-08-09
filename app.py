@@ -373,6 +373,7 @@ app.layout = html.Div(
             dashGridOptions={
                 "undoRedoCellEditing": False,
                 "undoRedoCellEditingLimit": 20,
+                "tabToNextCell": {"function": "tabToNextCell(params)"}
             },
             id="ag-grid-table",
             style={"height": "700px"},

@@ -174,3 +174,14 @@ dagfuncs.DMC_Select = class {
         this.prevFocus.focus();
     }
 };
+
+dagfuncs.tabToNextCell = (params) => {
+    const {node, api, backwards, previousCellPosition} = params
+    const {column, rowIndex} = previousCellPosition
+    console.log(rowIndex, column, "test opa")
+    if (backwards) {
+        return {rowIndex: rowIndex ? rowIndex-1 : 0, column: column}
+    } else {
+        return {rowIndex: rowIndex+1 , column: column}
+    }
+}
