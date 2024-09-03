@@ -14,22 +14,27 @@ function transformDateFormat(dateStr) {
         // dateObj is not a valid date
         return null;
     }
-    
+
     let monthShort = dateObj.toLocaleString('default', { month: 'short' });
     return `${day}-${monthShort}-${year}`;
 }
 
 dagcomponentfuncs.FormatSpecificCells = function (params) {
+    if (params.value === null || params.value === undefined) {
+        // Create clickable link for AMSTAT Link
+        return "-";
+    }
     if (params.data["Val ID"] == "Link Col") {
         return React.createElement(
             'a',
-            {href: params.value, target:"_blank"},
+            { href: params.value, target: "_blank" },
             "Link redirect"
         );
     }
     if (["Date Col"].includes(params.data["Val ID"])) {
         let finalValue = transformDateFormat(params.value);
-        return finalValue   
+        return finalValue
     }
+
     return params.formatValue(params.value);
 }

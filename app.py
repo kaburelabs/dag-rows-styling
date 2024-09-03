@@ -17,8 +17,8 @@ list_of_vals = [
         "Country Col": "United States",
         "Date Col": "2024-01-02",
         "Link Col": "https://www.google.com",
-        "Value 1": 5,
-        "Value 2": 7,
+        "Group Value 1": 5,
+        "Group Value 2": 7,
         "Sum Total": None,
     },
     {
@@ -33,8 +33,8 @@ list_of_vals = [
         "Country Col": "Canada",
         "Date Col": "2024-03-02",
         "Link Col": "https://www.google.com",
-        "Value 1": 5,
-        "Value 2": 7,
+        "Group Value 1": 4,
+        "Group Value 2": 8,
         "Sum Total": None,
     },
     {
@@ -49,8 +49,8 @@ list_of_vals = [
         "Country Col": "China",
         "Date Col": "2024-01-10",
         "Link Col": "https://www.google.com",
-        "Value 1": 5,
-        "Value 2": 7,
+        "Group Value 1": 3,
+        "Group Value 2": 8,
         "Sum Total": None,
     },
     {
@@ -65,8 +65,8 @@ list_of_vals = [
         "Country Col": "Brazil",
         "Date Col": "2024-10-02",
         "Link Col": "https://www.google.com",
-        "Value 1": 5,
-        "Value 2": 7,
+        "Group Value 1": 1,
+        "Group Value 2": 4,
         "Sum Total": None,
     },
     {
@@ -81,8 +81,8 @@ list_of_vals = [
         "Country Col": "France",
         "Date Col": "2024-01-01",
         "Link Col": "https://www.google.com",
-        "Value 1": 5,
-        "Value 2": 7,
+        "Group Value 1": 3,
+        "Group Value 2": 2,
         "Sum Total": None,
     },
 ]
@@ -283,7 +283,7 @@ app.layout = html.Div(
                     "autoHeight": True,
                     "valueSetter": {"function": "testValue(params)"},
                     "editable": {
-                        "function": "['Link Col', 'Text Col'].indexOf(params.data['Val ID']) === -1"
+                        "function": "['Link Col', 'Text Col', 'Sum Total'].indexOf(params.data['Val ID']) === -1"
                     },
                 }
                 for c in columns_list
